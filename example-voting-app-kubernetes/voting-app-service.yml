@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-service
+  labels:
+    name: voting-service
+    app: demo-voting-app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80 #votingApp pod listens to port 80 from k8s service
+  selector:
+    name: voting-app-pod
+    app: demo-voting-app
+
+#By default, all services uses ClusterIP and only internal pods can access. Since voting-app-pod is for external users,
+#we change the service type to Load Balancer (or NodePort)

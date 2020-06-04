@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: worker-app-pod
+   labels:
+     name: worker-app-pod
+     app: demo-voting-app
+spec:
+  containers:
+    - name: worker-app #One container per pod, so we only have 1 image. We can have multiple but rarely.
+      image: dockersamples/examplevotingapp_worker #from dockerHub
+
+
+#port section from spec is removed because we are not exposing it because it is NOT a web-application or needs
+#to be accessed by other pods.

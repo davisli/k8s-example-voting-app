@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db #This name will be used to identify by other pods
+  labels:
+    name: db-service
+    app: demo-voting-app
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432 #But which pod is listening on this port? We use Selector to "link" this service to redis pod
+  selector:
+    name: postgres-pod
+    app: demo-voting-app
